@@ -1,86 +1,139 @@
-# Collaborative Workspace for Projects
+# Collaborative Workspace
 
-A full-stack MERN (MongoDB, Express, React, Node.js) application enabling teams to manage projects collaboratively—featuring task boards, real-time updates, integrated scheduling, feedback cycles, and automated reports.
-
----
+ Collaborative Workspace is a **real-time task management and communication platform** built with the **MERN stack**.
+It enables teams to **plan, track, and collaborate** efficiently through automated scheduling, progress tracking, and integrated reporting.
 
 ##  Features
 
-- **Task Management**  
-  - Kanban-style task boards with drag-and-drop columns: Backlog | In Progress | Review | Done  
-  - Subtasks, labels, due dates, priorities, and assignees  
+###  Task Management
 
-- **Real-Time Collaboration**  
-  - Live board updates powered by Socket.IO  
-  - In-task activity feed captures text notes, attachments, voice notes, GitHub PRs/commits, and linked docs  
+* Auto-populates the calendar with project tasks, deadlines, and coach-assigned tasks.
+* Supports **CRUD operations** for tasks (create, update, delete).
+* Dynamic task status tracking (To-Do, In Progress, Completed).
 
-- **Meeting Scheduling & Calendar Integration**  
-  - Automatic scheduling of daily standups, weekly reviews, milestones  
-  - Google Calendar integration (if configured), with ICS fallback  
-  - Attendance tracking on meeting join  
+###  Progress Updates
 
-- **Weekly Timesheets & Reports**  
-  - Auto-generated timesheets combining task activity and meeting attendance  
-  - Exportable in Markdown and PDF formats  
+* Update progress using **text inputs, checklists, voice notes**, or **file attachments**.
+* Automatic sync with team dashboard and progress visualization.
 
-- **Feedback System**  
-  - Mentor feedback and peer reviews with ratings (clarity, quality, timeliness)  
-  - Visible summaries in timesheets and project dashboards  
+###  Team Collaboration
 
-- **Tool Integrations**  
-  - GitHub: Connect repo, webhook events integrated into activity feed  
-  - Notion & Google Docs: Attach links with metadata previews  
+* Seamless integration with **GitHub**, **Google Docs**, and **Notion** for joint project work.
+* Shared workspaces with real-time updates using **Socket.io** (optional).
+
+###  Meeting Scheduling
+
+* Automatically schedules **standups, reviews, and milestones** using project deadlines.
+* Integrates with **Google Calendar API** for meeting sync and reminders.
+
+###  Weekly Timesheets
+
+* Auto-generates weekly reports including:
+
+  * Task completion rate
+  * Peer feedback summaries
+  * Mentor reviews
+* Reports accessible to all team members and mentors.
+
+###  Feedback System
+
+* Collects mentor and peer feedback on submitted work.
+* Displays feedback alongside corresponding tasks for actionable insights.
+
+
+##  Architecture Overview
+
+```
+Frontend (React)
+│
+├── Components (TaskBoard, Calendar, FeedbackView, Reports)
+│
+Backend (Node.js + Express)
+│
+├── Routes (Tasks, Users, Reports, Meetings)
+├── Controllers (TaskController, FeedbackController)
+└── Integrations (GitHub API, Google Calendar API)
+│
+Database (MongoDB)
+```
 
 ---
 
-##  Tech Stack
+##  Technology Stack
 
-- **Frontend**: React (TypeScript), Vite, Tailwind CSS, Zustand, React Query  
-- **Backend**: Node.js, Express, MongoDB (Mongoose), Socket.IO  
-- **Authentication**: JWT (email/password; optional Google OAuth)  
-- **State & UI**: Optimistic UI updates, real-time data synchronization  
-- **Testing**: Jest (backend), Vitest (frontend)  
-- **Dev Tools**: Docker + docker-compose, ESLint, Prettier, Makefile, OpenAPI (Swagger)  
-- **PDF Generation**: Puppeteer (HTML → PDF) fallback  
+| Layer          | Technology                              |
+| -------------- | --------------------------------------- |
+| Frontend       | React.js, Redux Toolkit, TailwindCSS    |
+| Backend        | Node.js, Express.js                     |
+| Database       | MongoDB (Mongoose ORM)                  |
+| Authentication | JWT, bcrypt                             |
+| Integrations   | GitHub API, Google Docs API, Notion API |
+| Deployment     | Render / Vercel / MongoDB Atlas         |
 
 ---
 
-##  Getting Started (Local Setup)
+##  Installation
 
-1. **Clone and install dependencies**  
-   ```bash
-   git clone https://github.com/jahnavi-varma/Collaborative_Workspace_for_Project.git
-   cd Collaborative_Workspace_for_Project
-   pnpm install
-Copy example environment file
+### 1️ Clone the Repository
 
-bash
-Copy
-Edit
-cp server/.env.example server/.env
-Run development servers
+```bash
+git clone https://github.com/Ramasaikiran/Collaborative-Workspace.git
+cd Collaborative-Workspace
+```
 
-bash
-Copy
-Edit
-pnpm dev
-This starts:
+### 2️ Install Dependencies
 
-Frontend: http://localhost:3000 (or designated port)
+```bash
+# Backend dependencies
+cd server
+npm install
 
-Backend: http://localhost:5000 (or configured port)
+# Frontend dependencies
+cd ../client
+npm install
+```
 
-Seed demo data
-(if available in server/seed.ts)
+### 3️ Environment Variables
 
-bash
-Copy
-Edit
-pnpm run seed
-Explore the app
+Create a `.env` file in the **server** directory and add:
 
-Login with seeded credentials
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+GITHUB_API_KEY=your_github_key
+GOOGLE_API_KEY=your_google_key
+```
 
-Switch between Task Board, Calendar, Feedback, Weekly Report views
+### 4️ Run the Application
 
-Drag tasks, add updates, simulate meetings, generate timesheets
+```bash
+# Run backend
+cd server
+npm start
+
+# Run frontend
+cd ../client
+npm start
+```
+
+
+
+##  Future Enhancements
+
+* AI-based **task prioritization** and smart suggestions.
+* **Slack/Discord integration** for team notifications.
+* Voice-to-text transcription for meeting summaries.
+* Advanced analytics dashboard for team productivity metrics.
+
+
+
+##  Contributing
+
+Contributions are welcome!
+Please fork the repo and submit a PR after making necessary updates.
+For major changes, open an issue first to discuss what you’d like to change.
+
+
+##  License
+
+This project is licensed under the **MIT License**.
