@@ -44,20 +44,60 @@ It enables teams to **plan, track, and collaborate** efficiently through automat
 ##  Architecture Overview
 
 ```
-Frontend (React)
+Collaborative-Workspace/
 │
-├── Components (TaskBoard, Calendar, FeedbackView, Reports)
+├── client/                           # Frontend (React + TailwindCSS + Redux Toolkit)
+│   ├── public/                       # Static assets (favicon, images)
+│   ├── src/
+│   │   ├── app/
+│   │   │   └── store.js              # Redux Toolkit store configuration
+│   │   ├── assets/                   # Images, fonts, and global styles
+│   │   ├── components/               # Reusable UI Components
+│   │   │   ├── Navbar.jsx            # Top navigation
+│   │   │   ├── Sidebar.jsx           # Workspace navigation
+│   │   │   ├── Modal.jsx             # Generic modal component
+│   │   │   └── Button.jsx            # Tailwind-styled buttons
+│   │   ├── features/                 # Redux Slices (State Management)
+│   │   │   ├── auth/                 # Authentication slice (login/register)
+│   │   │   ├── workspace/            # Workspace data slice
+│   │   │   └── integrations/         # State for GitHub/Notion integrations
+│   │   ├── pages/                    # Main Application Pages
+│   │   │   ├── Dashboard.jsx         # User dashboard
+│   │   │   ├── Login.jsx             # Login page
+│   │   │   └── Workspace.jsx         # Specific workspace view
+│   │   ├── services/                 # API calls (Axios/RTK Query)
+│   │   ├── App.jsx                   # Main component & Routing
+│   │   └── index.css                 # Tailwind directives (@tailwind base; etc.)
+│   ├── .env                          # Frontend environment variables
+│   ├── package.json                  # Frontend dependencies
+│   └── tailwind.config.js            # TailwindCSS configuration
 │
-Backend (Node.js + Express)
+├── server/                           # Backend (Node.js + Express)
+│   ├── config/
+│   │   └── db.js                     # MongoDB connection setup
+│   ├── controllers/                  # Logic for handling requests
+│   │   ├── authController.js         # Login, Register, Refresh Token
+│   │   ├── workspaceController.js    # CRUD operations for workspaces
+│   │   └── integrationController.js  # Logic for GitHub/Notion/Google Docs APIs
+│   ├── models/                       # Mongoose Schemas
+│   │   ├── User.js                   # User schema
+│   │   └── Workspace.js              # Workspace data schema
+│   ├── routes/                       # API Routes
+│   │   ├── authRoutes.js             # /api/auth
+│   │   ├── workspaceRoutes.js        # /api/workspaces
+│   │   └── integrationRoutes.js      # /api/integrations
+│   ├── middleware/
+│   │   ├── authMiddleware.js         # JWT verification middleware
+│   │   └── errorMiddleware.js        # Global error handling
+│   ├── utils/                        # Helper functions
+│   │   └── generateToken.js          # JWT generation utility
+│   ├── .env                          # Backend secrets (MONGO_URI, JWT_SECRET, API_KEYS)
+│   ├── server.js                     # Entry point for the backend server
+│   └── package.json                  # Backend dependencies
 │
-├── Routes (Tasks, Users, Reports, Meetings)
-├── Controllers (TaskController, FeedbackController)
-└── Integrations (GitHub API, Google Calendar API)
-│
-Database (MongoDB)
-```
+└── README.md                         # Project documentation
 
----
+```
 
 ##  Technology Stack
 
@@ -137,3 +177,4 @@ For major changes, open an issue first to discuss what you’d like to change.
 ##  License
 
 This project is licensed under the **MIT License**.
+
