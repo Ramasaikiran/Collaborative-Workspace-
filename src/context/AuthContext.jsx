@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }) => {
             setTimeout(() => {
                 const userData = {
                     id: 'guest_' + Math.random().toString(36).substr(2, 9),
-                    email: 'guest@codehustlers.dev',
+                    email: 'guest@Nexacollab.dev',
                     full_name: 'Guest User',
                     role: 'guest',
                     avatar: null
